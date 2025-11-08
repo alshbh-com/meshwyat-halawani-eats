@@ -14,7 +14,174 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      advertisements: {
+        Row: {
+          created_at: string | null
+          display_order: number | null
+          id: string
+          image_url: string
+          is_active: boolean | null
+          link_url: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_url: string
+          is_active?: boolean | null
+          link_url?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string
+          is_active?: boolean | null
+          link_url?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      offers: {
+        Row: {
+          created_at: string | null
+          description: string
+          end_date: string
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          items: Json
+          price: number
+          start_date: string
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          end_date: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          items: Json
+          price: number
+          start_date: string
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          end_date?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          items?: Json
+          price?: number
+          start_date?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          created_at: string | null
+          customer_address: string | null
+          customer_name: string
+          customer_phone: string
+          delivery_notes: string | null
+          id: string
+          items: Json
+          order_number: number
+          status: string | null
+          total_amount: number
+        }
+        Insert: {
+          created_at?: string | null
+          customer_address?: string | null
+          customer_name: string
+          customer_phone: string
+          delivery_notes?: string | null
+          id?: string
+          items: Json
+          order_number?: never
+          status?: string | null
+          total_amount: number
+        }
+        Update: {
+          created_at?: string | null
+          customer_address?: string | null
+          customer_name?: string
+          customer_phone?: string
+          delivery_notes?: string | null
+          id?: string
+          items?: Json
+          order_number?: never
+          status?: string | null
+          total_amount?: number
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          category: Database["public"]["Enums"]["product_category"]
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          image_url: string | null
+          is_available: boolean | null
+          name: string
+          updated_at: string | null
+          weights: Json
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["product_category"]
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_available?: boolean | null
+          name: string
+          updated_at?: string | null
+          weights: Json
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["product_category"]
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_available?: boolean | null
+          name?: string
+          updated_at?: string | null
+          weights?: Json
+        }
+        Relationships: []
+      }
+      settings: {
+        Row: {
+          id: string
+          key: string
+          updated_at: string | null
+          value: string
+        }
+        Insert: {
+          id?: string
+          key: string
+          updated_at?: string | null
+          value: string
+        }
+        Update: {
+          id?: string
+          key?: string
+          updated_at?: string | null
+          value?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +190,13 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      product_category:
+        | "grilled_meat"
+        | "grilled_chicken"
+        | "sandwiches"
+        | "single_meals"
+        | "family_meals"
+        | "extras"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +323,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      product_category: [
+        "grilled_meat",
+        "grilled_chicken",
+        "sandwiches",
+        "single_meals",
+        "family_meals",
+        "extras",
+      ],
+    },
   },
 } as const
