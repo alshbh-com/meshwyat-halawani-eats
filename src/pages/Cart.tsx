@@ -43,9 +43,9 @@ const Cart = () => {
           customer_phone: formData.phone,
           customer_address: formData.address,
           delivery_notes: formData.notes,
-          items: cart,
+          items: cart as any,
           total_amount: getTotalPrice()
-        })
+        } as any)
         .select()
         .single();
 

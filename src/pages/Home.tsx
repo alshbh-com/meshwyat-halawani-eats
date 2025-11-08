@@ -26,7 +26,7 @@ const Home = () => {
       .eq('is_available', true)
       .order('display_order');
     
-    if (data) setProducts(data);
+    if (data) setProducts(data as Product[]);
   };
 
   const loadOffers = async () => {
@@ -38,7 +38,7 @@ const Home = () => {
       .gte('end_date', now)
       .lte('start_date', now);
     
-    if (data) setOffers(data);
+    if (data) setOffers(data as Offer[]);
   };
 
   const filteredProducts = selectedCategory === 'all' 

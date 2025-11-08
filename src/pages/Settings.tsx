@@ -16,7 +16,7 @@ const Settings = () => {
   const handleLogin = async () => {
     try {
       // التحقق من كلمة السر
-      const { data, error } = await supabase.rpc('verify_admin_password', {
+      const { data, error } = await supabase.rpc('verify_admin_password' as any, {
         password_input: password
       });
 
