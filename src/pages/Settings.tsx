@@ -23,6 +23,7 @@ const Settings = () => {
       if (error) throw error;
 
       if (data) {
+        sessionStorage.setItem('adminAuthenticated', 'true');
         setIsAuthenticated(true);
         toast({
           title: "تم الدخول بنجاح",

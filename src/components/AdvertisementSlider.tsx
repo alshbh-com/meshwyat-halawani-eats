@@ -3,6 +3,7 @@ import { Advertisement } from '@/types';
 import { supabase } from '@/integrations/supabase/client';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import Autoplay from 'embla-carousel-autoplay';
 
 export const AdvertisementSlider = () => {
@@ -34,14 +35,25 @@ export const AdvertisementSlider = () => {
         <CarouselContent>
           {ads.map((ad) => (
             <CarouselItem key={ad.id}>
-              <Card className="overflow-hidden">
-                <a href={ad.link_url || '#'} target="_blank" rel="noopener noreferrer">
-                  <img 
-                    src={ad.image_url} 
-                    alt={ad.title}
-                    className="w-full h-48 md:h-64 object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </a>
+              <Card className="overflow-hidden relative">
+                <img 
+                  src={ad.image_url} 
+                  alt={ad.title}
+                  className="w-full h-48 md:h-64 object-cover"
+                />
+                {ad.link_url && (
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                    <Button 
+                      asChild
+                      size="lg"
+                      className="shadow-glow bg-gradient-warm hover:scale-105 transition-transform"
+                    >
+                      <a href={ad.link_url} target="_blank" rel="noopener noreferrer">
+                        روح
+                      </a>
+                    </Button>
+                  </div>
+                )}
               </Card>
             </CarouselItem>
           ))}

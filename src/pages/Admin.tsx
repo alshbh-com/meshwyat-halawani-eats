@@ -14,8 +14,10 @@ import { Pencil, Trash2, Plus, Package, Megaphone, Gift, ShoppingCart, Upload } 
 import { categoryNames, weightNames } from '@/lib/categories';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
+import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [offers, setOffers] = useState<Offer[]>([]);
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
@@ -28,8 +30,14 @@ const Admin = () => {
   const [isAdDialogOpen, setIsAdDialogOpen] = useState(false);
 
   useEffect(() => {
+    // Check authentication
+    const isAuthenticated = sessionStorage.getItem('adminAuthenticated');
+    if (!isAuthenticated) {
+      navigate('/settings');
+      return;
+    }
     loadData();
-  }, []);
+  }, [navigate]);
 
   const loadData = async () => {
     const [productsData, offersData, adsData, ordersData] = await Promise.all([
