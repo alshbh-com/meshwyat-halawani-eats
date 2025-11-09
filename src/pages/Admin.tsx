@@ -39,10 +39,10 @@ const Admin = () => {
       supabase.from('orders').select('*').order('created_at', { ascending: false }).limit(50)
     ]);
 
-    if (productsData.data) setProducts(productsData.data as Product[]);
-    if (offersData.data) setOffers(offersData.data as Offer[]);
-    if (adsData.data) setAdvertisements(adsData.data as Advertisement[]);
-    if (ordersData.data) setOrders(ordersData.data as Order[]);
+    if (productsData.data) setProducts(productsData.data as unknown as Product[]);
+    if (offersData.data) setOffers(offersData.data as unknown as Offer[]);
+    if (adsData.data) setAdvertisements(adsData.data as unknown as Advertisement[]);
+    if (ordersData.data) setOrders(ordersData.data as unknown as Order[]);
   };
 
   const handleImageUpload = async (file: File): Promise<string> => {
@@ -94,14 +94,14 @@ const Admin = () => {
         if (editingProduct) {
           const { error } = await supabase
             .from('products')
-            .update(productData)
+            .update(productData as any)
             .eq('id', editingProduct.id);
           if (error) throw error;
           toast({ title: 'تم تحديث المنتج بنجاح' });
         } else {
           const { error } = await supabase
             .from('products')
-            .insert(productData);
+            .insert(productData as any);
           if (error) throw error;
           toast({ title: 'تم إضافة المنتج بنجاح' });
         }
@@ -226,14 +226,14 @@ const Admin = () => {
         if (editingOffer) {
           const { error } = await supabase
             .from('offers')
-            .update(formData)
+            .update(formData as any)
             .eq('id', editingOffer.id);
           if (error) throw error;
           toast({ title: 'تم تحديث العرض بنجاح' });
         } else {
           const { error } = await supabase
             .from('offers')
-            .insert(formData);
+            .insert(formData as any);
           if (error) throw error;
           toast({ title: 'تم إضافة العرض بنجاح' });
         }
@@ -336,14 +336,14 @@ const Admin = () => {
         if (editingAd) {
           const { error } = await supabase
             .from('advertisements')
-            .update(adData)
+            .update(adData as any)
             .eq('id', editingAd.id);
           if (error) throw error;
           toast({ title: 'تم تحديث الإعلان بنجاح' });
         } else {
           const { error } = await supabase
             .from('advertisements')
-            .insert(adData);
+            .insert(adData as any);
           if (error) throw error;
           toast({ title: 'تم إضافة الإعلان بنجاح' });
         }
